@@ -19,8 +19,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate{
     }
 
     func playSound(sound: String) {
-        
-        //Line 28 basically set up the location of where the sound is saved in our app and stores it
+        //Line 24 basically sets up the location of where the sound is saved in our app and stores it
         //into soundURL. Now soundUrl is an actual constant with a song inside.
         let soundUrl = Bundle.main.url(forResource: sound, withExtension: "wav")
         do {
@@ -29,14 +28,17 @@ class ViewController: UIViewController, AVAudioPlayerDelegate{
             //if it doesnt exsist then we will leave the try method and the code knows to go to a catch
             //and display the error.
             audioPlayer = try AVAudioPlayer(contentsOf: soundUrl!)
-            
         }
         catch{
             print(error)
         }
+        //Audio player plays the sound.
         audioPlayer.play()
     }
 
+    // notePressed will get the sender.tag which is an int of the button that was pressed. It will go inside
+    // the soundArray and use the tag integer of the button that was touched and send it to playSound() so
+    // that it plays some sound.
     @IBAction func notePressed(_ sender: UIButton) {
         let selectedSoundFileName: String = soundArray[sender.tag - 1]
         
